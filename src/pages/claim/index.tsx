@@ -30,7 +30,7 @@ const ClaimPage: React.FC = () => {
   const processingCount = claims.filter((c) => c.status === 'processing' || c.status === 'reported').length
 
   const handleClaimClick = (claimId: string) => {
-    console.info('[Claim] Click claim:', claimId)
+    Taro.navigateTo({ url: `/pages/claimDetail/index?id=${claimId}` })
   }
 
   const handleAddClaim = () => {

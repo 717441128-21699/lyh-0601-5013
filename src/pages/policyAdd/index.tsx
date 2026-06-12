@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { View, Text, Input, Picker } from '@tarojs/components'
+import { View, Text, Input, Picker, Image } from '@tarojs/components'
 import Taro, { useRouter } from '@tarojs/taro'
 import dayjs from 'dayjs'
 import { useInsuranceStore } from '@/store'
@@ -23,6 +23,7 @@ const PolicyAddPage: React.FC = () => {
   const [categoryIdx, setCategoryIdx] = useState(0)
   const [remark, setRemark] = useState('')
   const [selectedAssetIds, setSelectedAssetIds] = useState<string[]>([])
+  const [contractPhotos, setContractPhotos] = useState<string[]>([])
 
   useEffect(() => {
     if (renewFrom) {
@@ -83,7 +84,7 @@ const PolicyAddPage: React.FC = () => {
       endDate,
       status: computeStatus(startDate, endDate),
       assetIds: selectedAssetIds,
-      contractPhotos: [] as string[],
+      contractPhotos: contractPhotos,
       category: CATEGORY_MAP[CATEGORIES[categoryIdx]],
       remark: remark.trim(),
       isKey: false,
@@ -180,6 +181,51 @@ const PolicyAddPage: React.FC = () => {
             value={remark}
             onInput={(e) => setRemark(e.detail.value)}
           />
+        </View>
+        <View className={styles.formGroup}>
+          <Text className={styles.label}>合同照片</Text>
+          <View className={styles.photoGrid}>
+            {contractPhotos.map((src, idx) => (
+              <View key={idx} className={styles.photoItem}>
+                <Image
+                  className={styles.photoImg}
+                  src={src}
+                  mode="aspectFill"
+                  onClick={() =>
+                    Taro.previewImage({
+                      current: src,
+                      urls: contractPhotos,
+                    })
+                  }
+                />
+                <View
+                  className={styles.photoRemove}
+                  onClick={(e) => {
+                    e.stopPropagation()
+                    setContractPhotos((prev) => prev.filter((_, i) => i !== idx))
+                  }}
+                >
+                  <Text className={styles.photoRemoveText}>×</Text>
+                </View>
+              </View>
+            ))}
+            {contractPhotos.length < 9 && (
+              <View
+                className={styles.photoAdd}
+                onClick={() => {
+                  Taro.chooseImage({
+                    count: 9 - contractPhotos.length,
+                    success: (res) => {
+                      setContractPhotos((prev) => [...prev, ...res.tempFilePaths])
+                    },
+                  })
+                }}
+              >
+                <Text className={styles.photoAddIcon}>+</Text>
+                <Text className={styles.photoAddText}>添加照片</Text>
+              </View>
+            )}
+          </View>
         </View>
 
         {uninsuredAssets.length > 0 && (

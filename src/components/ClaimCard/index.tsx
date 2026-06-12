@@ -21,7 +21,14 @@ const ClaimCard: React.FC<ClaimCardProps> = ({ claim, onClick }) => {
   return (
     <View className={styles.card} onClick={onClick}>
       <View className={styles.header}>
-        <Text className={styles.assetName}>{claim.assetName}</Text>
+        <View className={styles.headerLeft}>
+          <Text className={styles.assetName}>{claim.assetName}</Text>
+          {claim.scenePhotos && claim.scenePhotos.length > 0 && (
+            <View className={styles.photoBadge}>
+              <Text className={styles.photoBadgeText}>📷 {claim.scenePhotos.length}</Text>
+            </View>
+          )}
+        </View>
         <StatusTag type={claim.status} text={statusTextMap[claim.status]} />
       </View>
       <View className={styles.body}>

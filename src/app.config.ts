@@ -8,7 +8,8 @@ export default defineAppConfig({
     'pages/policyDetail/index',
     'pages/policyAdd/index',
     'pages/assetDetail/index',
-    'pages/claimAdd/index'
+    'pages/claimAdd/index',
+    'pages/claimDetail/index'
   ],
   window: {
     backgroundTextStyle: 'light',

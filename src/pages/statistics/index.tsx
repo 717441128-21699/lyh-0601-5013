@@ -1,5 +1,6 @@
 import React, { useMemo } from 'react'
 import { View, Text, ScrollView } from '@tarojs/components'
+import Taro from '@tarojs/taro'
 import { useInsuranceStore } from '@/store'
 import StatCard from '@/components/StatCard'
 import styles from './index.module.scss'
@@ -126,9 +127,18 @@ const StatisticsPage: React.FC = () => {
         <View className={styles.card}>
           {recentClaims.length > 0 ? (
             recentClaims.map((claim) => (
-              <View className={styles.claimHistoryItem} key={claim.id}>
+              <View
+                className={styles.claimHistoryItem}
+                key={claim.id}
+                onClick={() => Taro.navigateTo({ url: `/pages/claimDetail/index?id=${claim.id}` })}
+              >
                 <View className={styles.claimHistoryLeft}>
-                  <Text className={styles.claimHistoryAsset}>{claim.assetName}</Text>
+                  <View className={styles.claimHistoryTop}>
+                    <Text className={styles.claimHistoryAsset}>{claim.assetName}</Text>
+                    {claim.scenePhotos && claim.scenePhotos.length > 0 && (
+                      <Text className={styles.claimPhotoTag}>📷 {claim.scenePhotos.length}</Text>
+                    )}
+                  </View>
                   <Text className={styles.claimHistoryDate}>{claim.reportTime}</Text>
                 </View>
                 <View className={styles.claimHistoryRight}>

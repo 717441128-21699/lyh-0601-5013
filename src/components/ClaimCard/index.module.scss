@@ -21,6 +21,26 @@
   margin-bottom: $spacing-sm;
 }
 
+.headerLeft {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  flex: 1;
+  min-width: 0;
+}
+
+.photoBadge {
+  background: $color-tag-bg-blue;
+  padding: 2rpx 12rpx;
+  border-radius: $radius-sm;
+  flex-shrink: 0;
+}
+
+.photoBadgeText {
+  font-size: $font-size-xs;
+  color: $color-primary;
+}
+
 .assetName {
   font-size: $font-size-lg;
   font-weight: $font-weight-semibold;

@@ -130,12 +130,27 @@
   min-width: 0;
 }
 
+.claimHistoryTop {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+}
+
 .claimHistoryAsset {
   font-size: $font-size-md;
   font-weight: $font-weight-medium;
   color: $color-text-primary;
   @include text-ellipsis;
   max-width: 380rpx;
+}
+
+.claimPhotoTag {
+  font-size: $font-size-xs;
+  color: $color-primary;
+  background: $color-tag-bg-blue;
+  padding: 2rpx 10rpx;
+  border-radius: $radius-sm;
+  flex-shrink: 0;
 }
 
 .claimHistoryDate {

@@ -87,6 +87,24 @@
   margin-bottom: $spacing-md;
 }
 
+.linkBtn {
+  @include button-reset;
+  padding: 8rpx 20rpx;
+  background: $color-tag-bg-blue;
+  border-radius: $radius-sm;
+
+  &:active {
+    opacity: 0.8;
+  }
+}
+
+.linkBtnText {
+  font-size: $font-size-xs;
+  color: $color-primary;
+  font-weight: $font-weight-medium;
+  white-space: nowrap;
+}
+
 .addClaimBtn {
   @include button-reset;
   padding: 8rpx 20rpx;
@@ -128,6 +146,19 @@
   font-weight: $font-weight-medium;
 }
 
+.photoGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $spacing-sm;
+}
+
+.photoThumb {
+  width: 200rpx;
+  height: 200rpx;
+  border-radius: $radius-md;
+  background: $color-bg-page;
+}
+
 .assetItem {
   display: flex;
   align-items: center;
@@ -138,15 +169,15 @@
   &:last-child {
     border-bottom: none;
   }
-
-  &:active {
-    background: $color-bg-hover;
-  }
 }
 
 .assetInfo {
   flex: 1;
   min-width: 0;
+
+  &:active {
+    opacity: 0.7;
+  }
 }
 
 .assetName {
@@ -165,11 +196,42 @@
   display: block;
 }
 
+.assetRight {
+  display: flex;
+  align-items: center;
+  gap: $spacing-md;
+  flex-shrink: 0;
+}
+
 .assetPrice {
   font-size: $font-size-md;
   font-weight: $font-weight-semibold;
   color: $color-premium;
-  flex-shrink: 0;
+}
+
+.removeBtn {
+  @include button-reset;
+  padding: 8rpx 16rpx;
+  background: $color-tag-bg-red;
+  border-radius: $radius-sm;
+
+  &:active {
+    opacity: 0.8;
+  }
+}
+
+.removeBtnText {
+  font-size: $font-size-xs;
+  color: $color-error;
+  font-weight: $font-weight-medium;
+}
+
+.emptyBlock {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: $spacing-lg 0;
+  gap: $spacing-md;
 }
 
 .emptyCardText {
@@ -178,4 +240,182 @@
   text-align: center;
   padding: $spacing-lg 0;
   display: block;
+}
+
+.primaryBtn {
+  @include button-reset;
+  padding: 12rpx 32rpx;
+  background: linear-gradient(135deg, $color-primary 0%, $color-primary-light 100%);
+  border-radius: $radius-button;
+
+  &:active {
+    opacity: 0.9;
+    transform: scale(0.98);
+  }
+}
+
+.primaryBtnText {
+  font-size: $font-size-sm;
+  color: $color-text-white;
+  font-weight: $font-weight-medium;
+}
+
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 100;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.modalContent {
+  width: 100%;
+  max-height: 80vh;
+  background: $color-bg-card;
+  border-radius: $radius-lg $radius-lg 0 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.modalHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: $spacing-lg;
+  border-bottom: 1rpx solid $color-divider;
+  flex-shrink: 0;
+}
+
+.modalTitle {
+  font-size: $font-size-lg;
+  font-weight: $font-weight-semibold;
+  color: $color-text-primary;
+}
+
+.modalClose {
+  width: 48rpx;
+  height: 48rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &:active {
+    opacity: 0.6;
+  }
+}
+
+.modalCloseText {
+  font-size: 44rpx;
+  color: $color-text-tertiary;
+  line-height: 1;
+}
+
+.modalBody {
+  flex: 1;
+  padding: 0 $spacing-lg;
+  max-height: 60vh;
+}
+
+.modalItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: $spacing-md 0;
+  border-bottom: 1rpx solid $color-divider;
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  &:active {
+    background: $color-bg-hover;
+  }
+}
+
+.modalItemSelected {
+  background: $color-tag-bg-blue;
+}
+
+.modalItemInfo {
+  flex: 1;
+  min-width: 0;
+}
+
+.modalItemName {
+  font-size: $font-size-md;
+  font-weight: $font-weight-medium;
+  color: $color-text-primary;
+  display: block;
+  @include text-ellipsis;
+  max-width: 500rpx;
+}
+
+.modalItemModel {
+  font-size: $font-size-xs;
+  color: $color-text-tertiary;
+  margin-top: 4rpx;
+  display: block;
+}
+
+.modalCheck {
+  font-size: $font-size-xl;
+  color: $color-primary;
+  font-weight: $font-weight-bold;
+}
+
+.modalFooter {
+  display: flex;
+  gap: $spacing-md;
+  padding: $spacing-md $spacing-lg $spacing-lg;
+  border-top: 1rpx solid $color-divider;
+  flex-shrink: 0;
+}
+
+.modalCancel {
+  @include button-reset;
+  flex: 1;
+  height: $button-height-lg;
+  background: $color-bg-page;
+  border-radius: $radius-button;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &:active {
+    opacity: 0.8;
+  }
+}
+
+.modalCancelText {
+  font-size: $font-size-md;
+  color: $color-text-secondary;
+  font-weight: $font-weight-medium;
+}
+
+.modalConfirm {
+  @include button-reset;
+  flex: 1;
+  height: $button-height-lg;
+  background: linear-gradient(135deg, $color-primary 0%, $color-primary-light 100%);
+  border-radius: $radius-button;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &:active {
+    opacity: 0.9;
+    transform: scale(0.98);
+  }
+}
+
+.modalConfirmText {
+  font-size: $font-size-md;
+  color: $color-text-white;
+  font-weight: $font-weight-medium;
 }

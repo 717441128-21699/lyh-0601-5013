@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { View, Text, Input, Picker } from '@tarojs/components'
+import { View, Text, Input, Picker, Image } from '@tarojs/components'
 import Taro from '@tarojs/taro'
 import dayjs from 'dayjs'
 import { useInsuranceStore } from '@/store'
@@ -27,6 +27,7 @@ const ClaimAddPage: React.FC = () => {
   const [claimAmount, setClaimAmount] = useState('')
   const [receivedAmount, setReceivedAmount] = useState('')
   const [remark, setRemark] = useState('')
+  const [scenePhotos, setScenePhotos] = useState<string[]>([])
 
   const handleSave = () => {
     if (activePolicies.length === 0) {
@@ -54,7 +55,7 @@ const ClaimAddPage: React.FC = () => {
       assetName: assetName.trim(),
       reportTime: reportTime,
       lossDescription: lossDescription.trim(),
-      scenePhotos: [] as string[],
+      scenePhotos: scenePhotos,
       claimAmount: Number(claimAmount),
       receivedAmount: Number(receivedAmount) || 0,
       status: STATUS_MAP[statusIdx],
@@ -158,6 +159,51 @@ const ClaimAddPage: React.FC = () => {
             value={remark}
             onInput={(e) => setRemark(e.detail.value)}
           />
+        </View>
+        <View className={styles.formGroup}>
+          <Text className={styles.label}>现场照片</Text>
+          <View className={styles.photoGrid}>
+            {scenePhotos.map((src, idx) => (
+              <View key={idx} className={styles.photoItem}>
+                <Image
+                  className={styles.photoImg}
+                  src={src}
+                  mode="aspectFill"
+                  onClick={() =>
+                    Taro.previewImage({
+                      current: src,
+                      urls: scenePhotos,
+                    })
+                  }
+                />
+                <View
+                  className={styles.photoRemove}
+                  onClick={(e) => {
+                    e.stopPropagation()
+                    setScenePhotos((prev) => prev.filter((_, i) => i !== idx))
+                  }}
+                >
+                  <Text className={styles.photoRemoveText}>×</Text>
+                </View>
+              </View>
+            ))}
+            {scenePhotos.length < 9 && (
+              <View
+                className={styles.photoAdd}
+                onClick={() => {
+                  Taro.chooseImage({
+                    count: 9 - scenePhotos.length,
+                    success: (res) => {
+                      setScenePhotos((prev) => [...prev, ...res.tempFilePaths])
+                    },
+                  })
+                }}
+              >
+                <Text className={styles.photoAddIcon}>+</Text>
+                <Text className={styles.photoAddText}>添加照片</Text>
+              </View>
+            )}
+          </View>
         </View>
       </View>
 
