@@ -9,7 +9,7 @@ import styles from './index.module.scss'
 type ReminderTab = 'expiring' | 'expired'
 
 const ReminderPage: React.FC = () => {
-  const { policies } = useInsuranceStore()
+  const { policies, assets } = useInsuranceStore()
   const [tab, setTab] = useState<ReminderTab>('expiring')
 
   const reminderPolicies = useMemo(() => {
@@ -28,14 +28,58 @@ const ReminderPage: React.FC = () => {
 
   const getRemainDays = (endDate: string) => dayjs(endDate).diff(dayjs(), 'day')
 
-  const handleRenew = (policyId: string) => {
+  const getAssetNames = (policyId: string) => {
+    return assets
+      .filter((a) => a.policyId === policyId)
+      .map((a) => a.name)
+      .join('、')
+  }
+
+  const handleRenew = (policy: { id: string; policyNo: string; companyName: string; premium: number; insuredAmount: number; category: string; assetIds: string[] }) => {
+    Taro.navigateTo({
+      url: `/pages/policyAdd/index?renewFrom=${policy.id}&policyNo=${encodeURIComponent(policy.policyNo)}&companyName=${encodeURIComponent(policy.companyName)}&premium=${policy.premium}&insuredAmount=${policy.insuredAmount}&category=${policy.category}`,
+    })
+  }
+
+  const handleDetail = (policyId: string) => {
     Taro.navigateTo({ url: `/pages/policyDetail/index?id=${policyId}` })
   }
 
+  const [showExportModal, setShowExportModal] = useState(false)
+
+  const renewalList = useMemo(() => {
+    return policies.filter((p) => p.status === 'expiring' || p.status === 'expired')
+  }, [policies])
+
+  const exportText = useMemo(() => {
+    if (renewalList.length === 0) return ''
+    const header = '保单号\t保险公司\t到期日\t保费\t保额\t关联资产'
+    const rows = renewalList.map((p) => {
+      const assetNames = getAssetNames(p.id) || '无'
+      return `${p.policyNo}\t${p.companyName}\t${p.endDate}\t¥${p.premium.toLocaleString()}\t¥${p.insuredAmount.toLocaleString()}\t${assetNames}`
+    })
+    return [header, ...rows].join('\n')
+  }, [renewalList, assets])
+
   const handleExport = () => {
-    const renewalList = policies.filter((p) => p.status === 'expiring' || p.status === 'expired')
-    console.info('[Reminder] Export renewal list:', renewalList.length)
-    Taro.showToast({ title: '续保清单已导出', icon: 'success' })
+    if (renewalList.length === 0) {
+      Taro.showToast({ title: '暂无需要续保的保单', icon: 'none' })
+      return
+    }
+    setShowExportModal(true)
+  }
+
+  const handleCopyExport = () => {
+    Taro.setClipboardData({
+      data: exportText,
+      success: () => {
+        Taro.showToast({ title: '已复制到剪贴板', icon: 'success' })
+      },
+      fail: (err) => {
+        console.error('[Reminder] Copy failed:', err)
+        Taro.showToast({ title: '复制失败', icon: 'none' })
+      },
+    })
   }
 
   return (
@@ -51,7 +95,7 @@ const ReminderPage: React.FC = () => {
         </View>
         <View className={styles.statItem}>
           <Text className={styles.statValue}>{expiringCount + expiredCount}</Text>
-          <Text className={styles.statLabel">需续保</Text>
+          <Text className={styles.statLabel}>需续保</Text>
         </View>
       </View>
       <View className={styles.tabRow}>
@@ -94,13 +138,13 @@ const ReminderPage: React.FC = () => {
                   <View className={styles.reminderActions}>
                     <View
                       className={`${styles.actionBtn} ${styles.actionBtnPrimary}`}
-                      onClick={() => handleRenew(policy.id)}
+                      onClick={() => handleRenew(policy)}
                     >
                       <Text>续保办理</Text>
                     </View>
                     <View
                       className={`${styles.actionBtn} ${styles.actionBtnOutline}`}
-                      onClick={() => handleRenew(policy.id)}
+                      onClick={() => handleDetail(policy.id)}
                     >
                       <Text>查看详情</Text>
                     </View>
@@ -119,6 +163,57 @@ const ReminderPage: React.FC = () => {
       <View className={styles.exportBtn} onClick={handleExport}>
         <Text>导出续保清单</Text>
       </View>
+
+      {showExportModal && (
+        <View className={styles.modalOverlay} onClick={() => setShowExportModal(false)}>
+          <View className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
+            <View className={styles.modalHeader}>
+              <Text className={styles.modalTitle}>续保清单</Text>
+              <View className={styles.modalClose} onClick={() => setShowExportModal(false)}>
+                <Text className={styles.modalCloseText}>✕</Text>
+              </View>
+            </View>
+            <ScrollView scrollY className={styles.modalBody}>
+              {renewalList.map((p) => {
+                const assetNames = getAssetNames(p.id)
+                return (
+                  <View className={styles.exportRow} key={p.id}>
+                    <View className={styles.exportField}>
+                      <Text className={styles.exportLabel}>保单号</Text>
+                      <Text className={styles.exportValue}>{p.policyNo}</Text>
+                    </View>
+                    <View className={styles.exportField}>
+                      <Text className={styles.exportLabel}>保险公司</Text>
+                      <Text className={styles.exportValue}>{p.companyName}</Text>
+                    </View>
+                    <View className={styles.exportField}>
+                      <Text className={styles.exportLabel}>到期日</Text>
+                      <Text className={styles.exportValue}>{p.endDate}</Text>
+                    </View>
+                    <View className={styles.exportField}>
+                      <Text className={styles.exportLabel}>保费</Text>
+                      <Text className={styles.exportValue}>¥{p.premium.toLocaleString()}</Text>
+                    </View>
+                    <View className={styles.exportField}>
+                      <Text className={styles.exportLabel}>保额</Text>
+                      <Text className={styles.exportValue}>¥{p.insuredAmount.toLocaleString()}</Text>
+                    </View>
+                    <View className={styles.exportField}>
+                      <Text className={styles.exportLabel}>关联资产</Text>
+                      <Text className={styles.exportValue}>{assetNames || '无'}</Text>
+                    </View>
+                  </View>
+                )
+              })}
+            </ScrollView>
+            <View className={styles.modalFooter}>
+              <View className={styles.copyBtn} onClick={handleCopyExport}>
+                <Text className={styles.copyBtnText}>复制清单内容</Text>
+              </View>
+            </View>
+          </View>
+        </View>
+      )}
     </View>
   )
 }

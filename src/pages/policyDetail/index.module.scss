@@ -3,23 +3,179 @@
 .container {
   min-height: 100vh;
   background: $color-bg-page;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: $spacing-xl;
 }
 
-.title {
+.emptyState {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+}
+
+.emptyText {
+  font-size: $font-size-md;
+  color: $color-text-tertiary;
+}
+
+.header {
+  background: linear-gradient(135deg, $color-primary 0%, $color-primary-light 100%);
+  padding: $spacing-xl $spacing-lg $spacing-lg;
+}
+
+.headerTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: $spacing-sm;
+}
+
+.policyNo {
+  font-size: $font-size-xxl;
+  font-weight: $font-weight-bold;
+  color: $color-text-white;
+}
+
+.companyName {
+  font-size: $font-size-md;
+  color: rgba(255, 255, 255, 0.85);
+  margin-bottom: $spacing-lg;
+  display: block;
+}
+
+.amountRow {
+  display: flex;
+  gap: $spacing-xl;
+}
+
+.amountItem {
+  display: flex;
+  flex-direction: column;
+}
+
+.amountLabel {
+  font-size: $font-size-xs;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 4rpx;
+}
+
+.amountValue {
   font-size: $font-size-xl;
+  font-weight: $font-weight-bold;
+  color: $color-text-white;
+}
+
+.card {
+  background: $color-bg-card;
+  border-radius: $radius-lg;
+  padding: $spacing-lg;
+  margin: $spacing-md $spacing-lg;
+  box-shadow: $shadow-card;
+}
+
+.cardTitle {
+  font-size: $font-size-lg;
   font-weight: $font-weight-semibold;
   color: $color-text-primary;
   margin-bottom: $spacing-md;
+  display: block;
 }
 
-.desc {
+.cardTitleRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: $spacing-md;
+}
+
+.addClaimBtn {
+  @include button-reset;
+  padding: 8rpx 20rpx;
+  background: $color-tag-bg-red;
+  border-radius: $radius-sm;
+
+  &:active {
+    opacity: 0.8;
+  }
+}
+
+.addClaimBtnText {
+  font-size: $font-size-xs;
+  color: $color-error;
+  font-weight: $font-weight-medium;
+  white-space: nowrap;
+}
+
+.infoRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: $spacing-sm 0;
+  border-bottom: 1rpx solid $color-divider;
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.infoLabel {
   font-size: $font-size-sm;
   color: $color-text-tertiary;
-  line-height: $line-height-loose;
+}
+
+.infoValue {
+  font-size: $font-size-sm;
+  color: $color-text-primary;
+  font-weight: $font-weight-medium;
+}
+
+.assetItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: $spacing-md 0;
+  border-bottom: 1rpx solid $color-divider;
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  &:active {
+    background: $color-bg-hover;
+  }
+}
+
+.assetInfo {
+  flex: 1;
+  min-width: 0;
+}
+
+.assetName {
+  font-size: $font-size-md;
+  font-weight: $font-weight-medium;
+  color: $color-text-primary;
+  display: block;
+  @include text-ellipsis;
+  max-width: 400rpx;
+}
+
+.assetModel {
+  font-size: $font-size-xs;
+  color: $color-text-tertiary;
+  margin-top: 4rpx;
+  display: block;
+}
+
+.assetPrice {
+  font-size: $font-size-md;
+  font-weight: $font-weight-semibold;
+  color: $color-premium;
+  flex-shrink: 0;
+}
+
+.emptyCardText {
+  font-size: $font-size-sm;
+  color: $color-text-tertiary;
   text-align: center;
+  padding: $spacing-lg 0;
+  display: block;
 }

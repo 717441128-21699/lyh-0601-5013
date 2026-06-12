@@ -3,23 +3,77 @@
 .container {
   min-height: 100vh;
   background: $color-bg-page;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: $spacing-xl;
+  padding-bottom: 160rpx;
 }
 
-.title {
-  font-size: $font-size-xl;
-  font-weight: $font-weight-semibold;
-  color: $color-text-primary;
-  margin-bottom: $spacing-md;
+.form {
+  padding: $spacing-md $spacing-lg;
 }
 
-.desc {
+.formGroup {
+  margin-bottom: $spacing-lg;
+}
+
+.label {
   font-size: $font-size-sm;
-  color: $color-text-tertiary;
-  line-height: $line-height-loose;
-  text-align: center;
+  font-weight: $font-weight-medium;
+  color: $color-text-secondary;
+  margin-bottom: $spacing-sm;
+  display: block;
+}
+
+.input {
+  width: 100%;
+  height: 80rpx;
+  background: $color-bg-card;
+  border: 1rpx solid $color-border;
+  border-radius: $radius-md;
+  padding: 0 $spacing-lg;
+  font-size: $font-size-md;
+  color: $color-text-primary;
+  box-sizing: border-box;
+}
+
+.pickerValue {
+  width: 100%;
+  height: 80rpx;
+  background: $color-bg-card;
+  border: 1rpx solid $color-border;
+  border-radius: $radius-md;
+  padding: 0 $spacing-lg;
+  font-size: $font-size-sm;
+  color: $color-text-primary;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: $spacing-md $spacing-lg;
+  background: $color-bg-card;
+  box-shadow: $shadow-float;
+  z-index: 10;
+}
+
+.saveBtn {
+  @include button-reset;
+  height: $button-height-lg;
+  background: linear-gradient(135deg, $color-error 0%, #FC8181 100%);
+  border-radius: $radius-button;
+  transition: all $transition-base;
+
+  &:active {
+    opacity: 0.9;
+    transform: scale(0.98);
+  }
+}
+
+.saveBtnText {
+  font-size: $font-size-lg;
+  color: $color-text-white;
+  font-weight: $font-weight-medium;
 }
