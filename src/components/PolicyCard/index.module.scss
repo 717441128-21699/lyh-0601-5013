@@ -1,0 +1,113 @@
+@use '@/styles/variables.scss' as *;
+
+.card {
+  background: $color-bg-card;
+  border-radius: $radius-lg;
+  padding: $spacing-lg;
+  box-shadow: $shadow-card;
+  margin-bottom: $spacing-md;
+  transition: all $transition-base;
+
+  &:active {
+    opacity: 0.9;
+    transform: scale(0.98);
+  }
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: $spacing-md;
+}
+
+.headerLeft {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+}
+
+.policyNo {
+  font-size: $font-size-lg;
+  font-weight: $font-weight-semibold;
+  color: $color-text-primary;
+  @include text-ellipsis;
+  max-width: 340rpx;
+}
+
+.keyBadge {
+  font-size: $font-size-xs;
+  color: $color-key;
+  background: $color-tag-bg-yellow;
+  padding: 2rpx 12rpx;
+  border-radius: $radius-xs;
+  white-space: nowrap;
+}
+
+.body {
+  margin-bottom: $spacing-md;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: $spacing-xs;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.label {
+  font-size: $font-size-sm;
+  color: $color-text-tertiary;
+  flex-shrink: 0;
+}
+
+.value {
+  font-size: $font-size-sm;
+  color: $color-text-secondary;
+  @include text-ellipsis;
+  max-width: 400rpx;
+  text-align: right;
+}
+
+.footer {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  padding-top: $spacing-md;
+  border-top: 1rpx solid $color-divider;
+}
+
+.amountGroup {
+  display: flex;
+  gap: $spacing-xl;
+}
+
+.amountItem {
+  display: flex;
+  flex-direction: column;
+}
+
+.amountLabel {
+  font-size: $font-size-xs;
+  color: $color-text-tertiary;
+  margin-bottom: 4rpx;
+}
+
+.amountValue {
+  font-size: $font-size-md;
+  font-weight: $font-weight-semibold;
+  color: $color-premium;
+}
+
+.remainDays {
+  font-size: $font-size-xs;
+  color: $color-expiry;
+  background: $color-tag-bg-orange;
+  padding: 4rpx 16rpx;
+  border-radius: $radius-sm;
+  white-space: nowrap;
+}

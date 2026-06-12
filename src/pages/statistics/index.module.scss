@@ -1,0 +1,164 @@
+@use '@/styles/variables.scss' as *;
+
+.container {
+  min-height: 100vh;
+  background: $color-bg-page;
+  padding-bottom: 40rpx;
+}
+
+.overviewCard {
+  margin: $spacing-md $spacing-lg;
+  background: linear-gradient(135deg, $color-primary 0%, $color-primary-light 100%);
+  border-radius: $radius-lg;
+  padding: $spacing-xl $spacing-lg;
+}
+
+.overviewTitle {
+  font-size: $font-size-md;
+  color: rgba(255, 255, 255, 0.85);
+  margin-bottom: $spacing-lg;
+}
+
+.overviewGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $spacing-md;
+}
+
+.overviewItem {
+  width: calc(50% - #{$spacing-md} / 2);
+  display: flex;
+  flex-direction: column;
+}
+
+.overviewValue {
+  font-size: $font-size-xl;
+  font-weight: $font-weight-bold;
+  color: $color-text-white;
+}
+
+.overviewLabel {
+  font-size: $font-size-xs;
+  color: rgba(255, 255, 255, 0.75);
+  margin-top: 4rpx;
+}
+
+.sectionTitle {
+  font-size: $font-size-lg;
+  font-weight: $font-weight-semibold;
+  color: $color-text-primary;
+  padding: $spacing-lg $spacing-lg $spacing-md;
+}
+
+.card {
+  background: $color-bg-card;
+  border-radius: $radius-lg;
+  padding: $spacing-lg;
+  box-shadow: $shadow-card;
+  margin: 0 $spacing-lg $spacing-md;
+}
+
+.categoryItem {
+  display: flex;
+  align-items: center;
+  margin-bottom: $spacing-md;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.categoryLabel {
+  font-size: $font-size-sm;
+  color: $color-text-secondary;
+  width: 120rpx;
+  flex-shrink: 0;
+}
+
+.categoryBarBg {
+  flex: 1;
+  height: 24rpx;
+  background: $color-bg-page;
+  border-radius: $radius-round;
+  overflow: hidden;
+  margin: 0 $spacing-sm;
+}
+
+.categoryBarFill {
+  height: 100%;
+  border-radius: $radius-round;
+  transition: width $transition-slow;
+}
+
+.categoryBarBlue {
+  background: $color-primary;
+}
+
+.categoryBarGreen {
+  background: $color-success;
+}
+
+.categoryBarOrange {
+  background: $color-warning;
+}
+
+.categoryValue {
+  font-size: $font-size-sm;
+  font-weight: $font-weight-semibold;
+  color: $color-text-primary;
+  width: 140rpx;
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.claimHistoryItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: $spacing-md 0;
+  border-bottom: 1rpx solid $color-divider;
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.claimHistoryLeft {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
+}
+
+.claimHistoryAsset {
+  font-size: $font-size-md;
+  font-weight: $font-weight-medium;
+  color: $color-text-primary;
+  @include text-ellipsis;
+  max-width: 380rpx;
+}
+
+.claimHistoryDate {
+  font-size: $font-size-xs;
+  color: $color-text-tertiary;
+  margin-top: 4rpx;
+}
+
+.claimHistoryRight {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  flex-shrink: 0;
+}
+
+.claimHistoryAmount {
+  font-size: $font-size-md;
+  font-weight: $font-weight-semibold;
+  color: $color-claim;
+}
+
+.claimHistoryStatus {
+  font-size: $font-size-xs;
+  color: $color-text-tertiary;
+  margin-top: 4rpx;
+}

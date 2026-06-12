@@ -1,0 +1,50 @@
+@use '@/styles/variables.scss' as *;
+
+.card {
+  background: $color-bg-card;
+  border-radius: $radius-lg;
+  padding: $spacing-lg;
+  box-shadow: $shadow-card;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.label {
+  font-size: $font-size-sm;
+  color: $color-text-tertiary;
+  margin-bottom: $spacing-xs;
+}
+
+.valueRow {
+  display: flex;
+  align-items: baseline;
+}
+
+.value {
+  font-size: $font-size-xl;
+  font-weight: $font-weight-bold;
+  line-height: $line-height-tight;
+}
+
+.unit {
+  font-size: $font-size-sm;
+  color: $color-text-tertiary;
+  margin-left: $spacing-xs;
+}
+
+.valuePrimary {
+  color: $color-primary;
+}
+
+.valueSuccess {
+  color: $color-success;
+}
+
+.valueWarning {
+  color: $color-warning;
+}
+
+.valueError {
+  color: $color-error;
+}

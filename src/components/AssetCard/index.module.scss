@@ -1,0 +1,112 @@
+@use '@/styles/variables.scss' as *;
+
+.card {
+  display: flex;
+  align-items: center;
+  background: $color-bg-card;
+  border-radius: $radius-lg;
+  padding: $spacing-md;
+  box-shadow: $shadow-card;
+  margin-bottom: $spacing-md;
+  transition: all $transition-base;
+
+  &:active {
+    opacity: 0.9;
+    transform: scale(0.98);
+  }
+}
+
+.thumbnail {
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: $radius-md;
+  flex-shrink: 0;
+  background: $color-bg-hover;
+}
+
+.info {
+  flex: 1;
+  margin-left: $spacing-md;
+  min-width: 0;
+}
+
+.nameRow {
+  display: flex;
+  align-items: center;
+  gap: $spacing-xs;
+  margin-bottom: $spacing-xs;
+}
+
+.name {
+  font-size: $font-size-md;
+  font-weight: $font-weight-semibold;
+  color: $color-text-primary;
+  @include text-ellipsis;
+  max-width: 320rpx;
+}
+
+.keyBadge {
+  font-size: $font-size-xs;
+  color: $color-key;
+  background: $color-tag-bg-yellow;
+  padding: 2rpx 12rpx;
+  border-radius: $radius-xs;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.metaRow {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  margin-bottom: $spacing-sm;
+}
+
+.category {
+  font-size: $font-size-sm;
+  color: $color-primary;
+  background: $color-tag-bg-blue;
+  padding: 2rpx 12rpx;
+  border-radius: $radius-xs;
+  white-space: nowrap;
+}
+
+.model {
+  font-size: $font-size-sm;
+  color: $color-text-tertiary;
+  @include text-ellipsis;
+  max-width: 240rpx;
+}
+
+.bottomRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.price {
+  font-size: $font-size-md;
+  font-weight: $font-weight-semibold;
+  color: $color-premium;
+}
+
+.keyToggle {
+  width: 64rpx;
+  height: 64rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: $spacing-sm;
+  flex-shrink: 0;
+}
+
+.keyToggleIcon {
+  font-size: 36rpx;
+  color: $color-text-disabled;
+}
+
+.keyToggleActive {
+  .keyToggleIcon {
+    color: $color-key;
+  }
+}

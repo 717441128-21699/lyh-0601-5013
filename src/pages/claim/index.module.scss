@@ -1,0 +1,92 @@
+@use '@/styles/variables.scss' as *;
+
+.container {
+  min-height: 100vh;
+  background: $color-bg-page;
+  padding-bottom: 120rpx;
+}
+
+.headerCard {
+  margin: $spacing-md $spacing-lg;
+  background: linear-gradient(135deg, $color-primary 0%, $color-primary-light 100%);
+  border-radius: $radius-lg;
+  padding: $spacing-lg;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.statItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.statValue {
+  font-size: $font-size-xxl;
+  font-weight: $font-weight-bold;
+  color: $color-text-white;
+}
+
+.statLabel {
+  font-size: $font-size-xs;
+  color: rgba(255, 255, 255, 0.8);
+  margin-top: 4rpx;
+}
+
+.filterRow {
+  display: flex;
+  gap: $spacing-sm;
+  padding: $spacing-sm $spacing-lg;
+  background: $color-bg-card;
+  border-bottom: 1rpx solid $color-divider;
+}
+
+.filterBtn {
+  @include button-reset;
+  padding: 8rpx 24rpx;
+  font-size: $font-size-sm;
+  border-radius: $radius-round;
+  background: $color-bg-page;
+  color: $color-text-secondary;
+  transition: all $transition-fast;
+
+  &:active {
+    opacity: 0.8;
+  }
+}
+
+.filterBtnActive {
+  background: $color-primary;
+  color: $color-text-white;
+}
+
+.listContent {
+  padding: $spacing-md $spacing-lg;
+}
+
+.addButton {
+  position: fixed;
+  right: $spacing-lg;
+  bottom: 180rpx;
+  width: 112rpx;
+  height: 112rpx;
+  background: linear-gradient(135deg, $color-error 0%, #FC8181 100%);
+  border-radius: $radius-round;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8rpx 24rpx rgba(229, 62, 62, 0.4);
+  z-index: 20;
+  transition: all $transition-base;
+
+  &:active {
+    opacity: 0.9;
+    transform: scale(0.95);
+  }
+}
+
+.addIcon {
+  font-size: 48rpx;
+  color: $color-text-white;
+}
